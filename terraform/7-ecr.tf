@@ -1,5 +1,5 @@
-resource "aws_ecr_repository" "product-service" {
-  name                 = "product-service"
+resource "aws_ecr_repository" "product-service-image" {
+  name                 = "${var.app-prefix}-product-service"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
@@ -7,7 +7,8 @@ resource "aws_ecr_repository" "product-service" {
   }
 
   tags = {
-    Name = "${var.app-prefix}-tfvpc-pvtrt-az2"
+    Name = "${var.app-prefix}-product-service"
     App  = var.app-name
   }
 }
+

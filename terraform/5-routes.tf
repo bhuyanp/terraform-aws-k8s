@@ -1,7 +1,6 @@
 
-
-
 # Public Routing table for the VPC
+# Single route table can be attached to multiple public subnet
 resource "aws_route_table" "tfvpc-pubrt" {
   vpc_id = aws_vpc.this.id
   route {

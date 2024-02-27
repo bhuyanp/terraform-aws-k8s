@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fs-product-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fs-product-service
+  template:
+    metadata:
+      labels:
+        app: fs-product-service
+    spec:
+      containers:
+        - name: fs-product-service
+          image: fs-product-service:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
