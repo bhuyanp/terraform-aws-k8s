@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  #namespace: robot-shop
+  name: fs-app
+spec:
+  ingressClassName: azure-application-gateway
+  rules:
+    - http:
+        paths:
+          - path: /product
+            pathType: Prefix
+            backend:
+              service:
+                name: fs-product
+                port:
+                  number: 8080
+          - path: /customer
+            pathType: Prefix
+            backend:
+              service:
+                name: fs-customer
+                port:
+                  number: 8080
