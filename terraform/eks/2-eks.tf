@@ -35,13 +35,10 @@ resource "aws_eks_cluster" "fs-app-cluster" {
   role_arn = aws_iam_role.eks-cluster-role.arn
 
   vpc_config {
-    subnet_ids = [aws_subnet.tfvpc-pvtsubnet-app-az1.id, aws_subnet.tfvpc-pvtsubnet-app-az2.id]
+    subnet_ids = module.vpc.private_subnets
   }
 
-  tags = {
-    Name = "${var.app-prefix}-cluster"
-    App  = var.app-name
-  }
+  tags = var.tags
 
   # Ensure that IAM Role permissions are created before and deleted after EKS Cluster handling.
   # Otherwise, EKS will not be able to properly delete EKS managed EC2 infrastructure such as Security Groups.

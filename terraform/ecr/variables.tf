@@ -10,5 +10,5 @@ variable "app-prefix" {
 
 variable "services" {
   type = list(string)
-  default = ["customer","product"]
+  //default = ["customer","product"]
 }

@@ -35,3 +35,7 @@ build/
 /terraform/.terraform
 /terraform/*.lock*
 /terraform/*.tfstate*
+
+/terraform/ecr/.terraform
+/terraform/ecr/*.lock*
+/terraform/ecr/*.tfstate*

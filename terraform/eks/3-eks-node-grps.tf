@@ -32,8 +32,9 @@ resource "aws_eks_node_group" "fs-app-cluster-ng" {
   cluster_name    = aws_eks_cluster.fs-app-cluster.name
   node_group_name = "fs-app-cluster-ng"
   node_role_arn   = aws_iam_role.fs-ng-role.arn
-  subnet_ids      = [aws_subnet.tfvpc-pvtsubnet-app-az1.id,aws_subnet.tfvpc-pvtsubnet-app-az2.id]
+  subnet_ids      = module.vpc.private_subnets
   instance_types = ["t2.micro"]
+
 
   scaling_config {
     desired_size = 1
@@ -45,10 +46,7 @@ resource "aws_eks_node_group" "fs-app-cluster-ng" {
     max_unavailable = 1
   }
 
-  tags = {
-    Name = "${var.app-prefix}-cluster-ng"
-    App  = var.app-name
-  }
+  tags = var.tags
 
   # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.
   # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.
